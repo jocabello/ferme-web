@@ -7,4 +7,4 @@ def catalogo(request):
 
 
 def detalle(request):
-    return ('detalle')
+    return render(request, 'productos/detalle.html', {})
