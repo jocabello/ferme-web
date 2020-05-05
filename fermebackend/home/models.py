@@ -197,6 +197,7 @@ class Producto(models.Model):
         'TipoProduct', models.DO_NOTHING, db_column='fk_id_product')
 
     class Meta:
+        managed = False
         db_table = 'producto'
 
 

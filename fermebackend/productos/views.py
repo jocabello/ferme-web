@@ -4,6 +4,10 @@ from django.db import models
 from home import models  # intellisense mala en VScode
 
 
+def tipoProducto(producto):
+    tipos = models.Tipo_Product.objects.all()
+
+
 def catalogo(request):
     productos = models.Producto.objects.all()
     return render(request, 'productos/catalogo.html', {'productos': productos})

@@ -1,5 +1,4 @@
 body {
-  margin-top: 20px;
   background: #eee;
 }
 /* E-commerce */
@@ -146,4 +145,7 @@ table.shoping-cart-table tr td:last-child {
   font-size: 90%;
   background: #ffffff;
   padding: 10px 15px;
+}
+.contenido-catalogo {
+  margin-top: 1rem;
 }
