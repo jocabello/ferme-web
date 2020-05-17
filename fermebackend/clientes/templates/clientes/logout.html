@@ -1,0 +1,14 @@
+{% extends 'home/base.html' %} {% block content %}
+<link
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+  rel="stylesheet"
+/>
+{% load static %} <link href="{% static "css/catalogo.css" %}"
+rel="stylesheet"/> {% load crispy_forms_tags %}
+
+<h2>Logout</h2>
+<div class="col-sm-4">
+  <h2>Su sesión ha finalizado.</h2>
+</div>
+
+{% endblock content%}

@@ -17,10 +17,24 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from clientes.views import registro, logout_view, editarCuenta, cambiarPassword
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('cuentas.urls')),
     path('', include('home.urls')),
     path('', include('productos.urls')),
+    
+    #path('', include('clientes.urls')),
+    
+    path('registro/', registro, name="registro"),
+    
+    path('', include('django.contrib.auth.urls')),
+
+    path('logout/', logout_view, name="logout_view"),
+
+    path('editarcuenta/', editarCuenta, name="editarCuenta"),
+    path('cambiarpassword/', cambiarPassword, name="cambiarPassword"),
+    
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

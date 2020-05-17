@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'productos',
     'ordenesdecompra',
     'home',
+    'clientes',
+    'proveedores',
+    'administradores',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -71,8 +75,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'fermebackend.wsgi.application'
+AUTH_USER_MODEL = 'clientes.Cliente'
 
+WSGI_APPLICATION = 'fermebackend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -134,3 +139,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR))
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"

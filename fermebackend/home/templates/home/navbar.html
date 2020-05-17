@@ -15,16 +15,21 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#"
+        <a class="nav-link" href="/"
           >Inicio <span class="sr-only">(current)</span></a
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Catálogo</a>
+        <a class="nav-link" href="/catalogo">Catálogo</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Contacto</a>
       </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link">Hola, {{ user.get_username }}! Bienvenido.</a>
+      </li>
+      {% endif %}
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input
@@ -37,5 +42,37 @@
         Buscar
       </button>
     </form>
+    <ul class="navbar-nav mr-auto">
+      {% if user.is_authenticated %}
+      <li class="nav-item active">
+        <a class="nav-link" href="/editarcuenta"
+          >Mi perfil<span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#"
+          >Mi carro<span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/logout"
+          >Finalizar sesión<span class="sr-only">(current)</span></a
+        >
+      </li>
+      {% else %}
+      <li class="nav-item active">
+        <a class="nav-link" href="/registro"
+          >Registrate aquí<span class="sr-only">(current)</span></a
+        >
+      </li>
+
+      <li class="nav-item active">
+        <a class="nav-link" href="/login"
+          >Iniciar sesión<span class="sr-only">(current)</span></a
+        >
+      </li>
+
+      {% endif %}
+    </ul>
   </div>
 </nav>
