@@ -4,20 +4,28 @@ from django.db import models
 from home import models  # intellisense mala en VScode
 
 
-def tipoProducto(producto):
-    tipos = models.Tipo_Product.objects.all()
-    return 0
-
 def catalogo(request):
     productos = models.Producto.objects.all()
-    return render(request, 'productos/catalogo.html', {'productos': productos})
+    tipos = models.TipoProduct.objects.all()
+    familias = models.FamilyProduct.objects.all()
+
+    contexto = {'tipos': tipos, 'familias': familias, 'productos': productos}
+
+    return render(request, 'productos/catalogo.html', contexto)
 
 
-def detalle(request):
-    return render(request, 'productos/detalle.html', {})
+def detalle(request, id):
+    producto = models.Producto.objects.get(id_producto=id)
+    tipos = models.TipoProduct.objects.all()
+    familias = models.FamilyProduct.objects.all()
+
+    contexto = {'tipos': tipos, 'familias': familias, 'producto': producto}
+
+    return render(request, 'productos/detalle.html', contexto)
 
 
-# TODO en home, hacer template genérico de login, logout, registro, recuperación de contraseña, etc, que sea consumido por las apps
-# TODO app admins
-# TODO app clientes (natural o empresa)
-# TODO app proveedores
+def obtener_datos_producto(id):
+    producto = models.Producto.objects.get(id_producto=id)
+    tipo = models.TipoProduct.objects.get(id_family=producto.fk_id_product)
+    familia = models.FamilyProduct.objects.all(
+        id_family=producto.fk_id_familia)

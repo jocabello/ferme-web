@@ -23,11 +23,14 @@ rel="stylesheet"/>
             <a href="#" class="product-name"> {{i.descripcion}}</a>
 
             <div class="small m-t-xs">
-              Stock: {{i.stock}}
+              Stock: {{i.stock}} id: {{i.id_producto}} fk familia:
+              {{i.fk_id_familia}}
             </div>
             <br />
             <div class="m-t text-center">
-              <a href="#" class="btn btn-xs btn-outline btn-primary"
+              <a
+                href="/detalle/{{i.id_producto}}"
+                class="btn btn-xs btn-outline btn-primary"
                 >Ver detalle <i class="fa fa-long-arrow-right"></i>
               </a>
             </div>
