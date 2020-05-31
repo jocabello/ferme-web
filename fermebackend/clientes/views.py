@@ -5,6 +5,12 @@ from clientes.forms import RegistroForm, EditarCuentaForm
 
 from django.contrib.auth.forms import PasswordChangeForm
 
+from django.http import JsonResponse
+
+import json
+
+from home.models import Producto
+
 
 def registro(response):
     if response.method == "POST":
@@ -16,9 +22,6 @@ def registro(response):
         form = RegistroForm()
 
     return render(response, "clientes/registro.html", {"form": form})
-
-
-from django.contrib.auth import logout
 
 
 def logout_view(request):
@@ -52,6 +55,36 @@ def cambiarPassword(request):
         form = PasswordChangeForm(user=request.user)
         return render(request, 'clientes/cambiar_password.html',
                       {"form": form})
+
+
+def checkout(request):
+    if request.user.is_authenticated:
+        cliente = request.user.cliente
+        orden, created = Orden.object.get_or_create(cliente=cliente,
+                                                    complete=False)
+        productos = orden.ordenproducto_set.all()
+    else:
+        productos = []
+        orden = {'get_cart_total': 0, 'get_cart_items': 0}
+
+    context = {'productos': productos, 'orden': orden}
+
+    return render(request, 'clientes/checkout.html', context)
+
+
+def actualizarProducto(request):
+    data = json.loads(request.body)
+    idProducto = data['idProducto']
+    accion = data['accion']
+
+    print('idProducto:', idProducto)
+    print('accion:', accion)
+
+    cliente = request.user.cliente
+    producto = Producto.object.get(id_producto=idProducto)
+
+    return JsonResponse('Producto agregado',
+                        safe=False)  #ni idea pa que  es el safe=False
 
 
 # def carro(request):

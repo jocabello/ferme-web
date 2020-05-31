@@ -4,8 +4,8 @@
   <div class="row">
     <div class="col-xs-3 item-photo">
       <img
-        style="max-width: 100%;"
-        src="https://ak1.ostkcdn.com/images/products/8818677/Samsung-Galaxy-S4-I337-16GB-AT-T-Unlocked-GSM-Android-Cell-Phone-85e3430e-6981-4252-a984-245862302c78_600.jpg"
+        style="max-width: 70%;"
+        src="https://herramientas.cl/imagenes/productos/51233.jpg"
       />
     </div>
     <div class="col-xs-5" style="border: 0px solid gray;">
@@ -14,7 +14,7 @@
         {{producto.descripcion}}
       </h3>
       <h5 style="color: #337ab7;">
-        Familia: <a href="#">Samsung</a>
+        Familia: <a href="#">nom_familia</a>
         <!-- <small style="color: #337ab7;">(5054 ventas)</small> -->
       </h5>
       <h6 class="title-price"><small>Stock: {{producto.stock}}</small></h6>
@@ -54,7 +54,11 @@
 
       <!-- Botones de compra -->
       <div class="section" style="padding-bottom: 20px;">
-        <button class="btn btn-success">
+        <button
+          data-producto="{{producto.id_producto}}"
+          data-action="agregar"
+          class="btn btn-success actualizar-carro"
+        >
           <span
             style="margin-right: 20px;"
             class="glyphicon glyphicon-shopping-cart"
