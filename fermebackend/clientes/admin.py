@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from clientes.models import Cliente
+from clientes.models import *
 
 
 class AdministradorClientes(UserAdmin):
@@ -20,4 +20,10 @@ class AdministradorClientes(UserAdmin):
     ordering = ('email', )
 
 
-admin.site.register(Cliente, AdministradorClientes)
+admin.site.register(
+    Cliente,
+    AdministradorClientes,
+)
+admin.site.register(Orden)
+admin.site.register(OrdenProducto)
+admin.site.register(DireccionDespacho)

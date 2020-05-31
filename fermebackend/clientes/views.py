@@ -10,6 +10,7 @@ from django.http import JsonResponse
 import json
 
 from home.models import Producto
+from clientes.models import OrdenProducto, Orden
 
 
 def registro(response):
@@ -87,6 +88,16 @@ def actualizarProducto(request):
                         safe=False)  #ni idea pa que  es el safe=False
 
 
-# def carro(request):
-#     if request.user.is_authenticated:
-#         cliente = request.user.cliente
+def carro(request):
+
+    if request.user.is_authenticated:
+        cliente = request.user
+        orden, created = Orden.objects.get_or_create(cliente=cliente,
+                                                     finalizada=False)
+        productos = orden.ordenproducto_set.all()
+    else:
+        productos = []
+
+    context = {'productos': productos}
+
+    return render(request, 'clientes/carro.html', context)
