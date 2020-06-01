@@ -1,6 +1,6 @@
-{% extends 'home/base.html' %} {% block content %}
+{% extends 'home/base.html' %} {% block content %} {% load static %} <link
+href="{% static "css/carro.css" %}" rel="stylesheet"/>
 <h1>carro de compras</h1>
-
 <div class="row">
   <div class="col-lg-12">
     <div class="box-element">
@@ -13,7 +13,7 @@
       <table class="table">
         <tr>
           <th>
-            <h5>Items: <strong>999</strong></h5>
+            <h5>Proructos: <strong>999</strong></h5>
           </th>
           <th>
             <h5>Total:<strong> $99</strong></h5>
@@ -34,18 +34,15 @@
     <div class="box-element">
       <div class="cart-row">
         <div style="flex: 2;"></div>
-        <div style="flex: 2;"><strong>Item</strong></div>
-        <div style="flex: 1;"><strong>Price</strong></div>
-        <div style="flex: 1;"><strong>Quantity</strong></div>
+        <div style="flex: 2;"><strong>Producto</strong></div>
+        <div style="flex: 1;"><strong>Precio</strong></div>
+        <div style="flex: 1;"><strong>Cantidad</strong></div>
         <div style="flex: 1;"><strong>Total</strong></div>
       </div>
       {% for i in productos %}
       <div class="cart-row">
         <div style="flex: 2;">
-          <img
-            class="row-image"
-            src="https://herramientas.cl/imagenes/productos/51233.jpg"
-          />
+          <img class="row-image" src="#" />
         </div>
         <div style="flex: 2;"><p>{{i.producto.descripcion}}</p></div>
         <div style="flex: 1;"><p>${{i.producto.precio}}</p></div>
@@ -56,14 +53,14 @@
               data-product="{{i.product.id}}"
               data-action="add"
               class="chg-quantity update-cart"
-              src="https://stepswithcode.s3-us-west-2.amazonaws.com/m1-prt8/3+arrow-up.png"
+              src="{% static 'imagenes/arrow-up.png' %}"
             />
 
             <img
               data-product="{{item.product.id}}"
               data-action="remove"
               class="chg-quantity update-cart"
-              src="https://stepswithcode.s3-us-west-2.amazonaws.com/m1-prt8/2+arrow-down.png"
+              src="{% static 'imagenes/arrow-down.png' %}"
             />
           </div>
         </div>
