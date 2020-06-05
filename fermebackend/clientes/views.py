@@ -10,7 +10,7 @@ from django.http import JsonResponse
 import json
 
 from home.models import Producto
-from clientes.models import OrdenProducto, Orden
+from clientes.models import *
 
 
 def registro(response):
@@ -59,33 +59,48 @@ def cambiarPassword(request):
 
 
 def checkout(request):
-    if request.user.is_authenticated:
-        cliente = request.user.cliente
-        orden, created = Orden.object.get_or_create(cliente=cliente,
-                                                    complete=False)
-        productos = orden.ordenproducto_set.all()
-    else:
-        productos = []
-        orden = {'get_cart_total': 0, 'get_cart_items': 0}
+    # if request.user.is_authenticated:
+    #     cliente = request.user
+    #     orden, created = Orden.object.get_or_create(cliente=cliente,
+    #                                                 complete=False)
+    #     productos = orden.ordenproducto_set.all()
+    # else:
+    #     productos = []
+    #     orden = {'get_cart_total': 0, 'get_cart_items': 0}
 
-    context = {'productos': productos, 'orden': orden}
+    # context = {'productos': productos, 'orden': orden}
 
     return render(request, 'clientes/checkout.html', context)
 
 
 def actualizarProducto(request):
-    data = json.loads(request.body)
+    body_unicode = request.body.decode('utf-8')
+    data = json.loads(body_unicode)
+
     idProducto = data['idProducto']
     accion = data['accion']
 
     print('idProducto:', idProducto)
     print('accion:', accion)
 
-    cliente = request.user.cliente
-    producto = Producto.object.get(id_producto=idProducto)
+    cliente = request.user
+    producto = Producto.objects.get(id_producto=idProducto)
+    orden, created = Orden.objects.get_or_create(cliente=cliente,
+                                                 finalizada=False)
+    ordenProducto, created = OrdenProducto.objects.get_or_create(
+        orden=orden, producto=producto)
 
-    return JsonResponse('Producto agregado',
-                        safe=False)  #ni idea pa que  es el safe=False
+    if accion == 'agregar':
+        ordenProducto.cantidad = (ordenProducto.cantidad + 1)
+    elif accion == 'eliminar':
+        ordenProducto.cantidad = (ordenProducto.cantidad - 1)
+
+    ordenProducto.save()
+
+    if ordenProducto.cantidad <= 0:
+        ordenProducto.delete()
+
+    return JsonResponse('Producto agregado', safe=False)
 
 
 def carro(request):
@@ -98,6 +113,6 @@ def carro(request):
     else:
         productos = []
 
-    context = {'productos': productos}
+    context = {'productos': productos, 'orden': orden}
 
     return render(request, 'clientes/carro.html', context)

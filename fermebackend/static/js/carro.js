@@ -1,25 +1,33 @@
-console.log("link a carro.js funcionando :D");
-
 var actualizarBtns = document.getElementsByClassName("actualizar-carro");
 
 for (var i = 0; i < actualizarBtns.length; i++) {
   actualizarBtns[i].addEventListener("click", function () {
     var idProducto = this.dataset.producto;
-    var accion = this.dataset.action;
-    console.log(idProducto, accion, usuario);
+    var accion = this.dataset.accion;
+    console.log(
+      "id producto:",
+      idProducto,
+      "accion:",
+      accion,
+      "usuariox",
+      usuario
+    );
 
     if (usuario == "AnonymousUser") {
       console.log("usuario anónimo");
     } else {
       actualizarOrdenUsuario(idProducto, accion);
+      // console.log("accion:", accion);
     }
   });
 }
 
 function actualizarOrdenUsuario(idProducto, accion) {
-  console.log("usuario registrado :D!");
+  console.log("funcion actualizarOrdenUsuario...");
 
   var url = "/actualizar_producto/";
+
+  console.log(JSON.stringify({ idProducto: idProducto, accion: accion }));
 
   fetch(url, {
     method: "POST",
@@ -30,10 +38,12 @@ function actualizarOrdenUsuario(idProducto, accion) {
     body: JSON.stringify({ idProducto: idProducto, accion: accion }),
   })
     .then((response) => {
+      console.log("RESPUESTA:", response);
       return response.json();
     })
 
     .then((data) => {
-      console.log("data:", data);
+      console.log("dataaa:", data);
+      // location.reload();
     });
 }

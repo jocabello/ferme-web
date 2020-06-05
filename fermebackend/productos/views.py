@@ -29,3 +29,5 @@ def obtener_datos_producto(id):
     tipo = models.TipoProduct.objects.get(id_family=producto.fk_id_product)
     familia = models.FamilyProduct.objects.all(
         id_family=producto.fk_id_familia)
+
+    return {'tipo': tipo, 'familia': familia}

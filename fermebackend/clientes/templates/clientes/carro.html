@@ -13,10 +13,10 @@ href="{% static "css/carro.css" %}" rel="stylesheet"/>
       <table class="table">
         <tr>
           <th>
-            <h5>Proructos: <strong>999</strong></h5>
+            <h5>Total productos: <strong>{{orden.get_items_carro}}</strong></h5>
           </th>
           <th>
-            <h5>Total:<strong> $99</strong></h5>
+            <h5>Valor total:<strong> ${{orden.get_total_carro}}</strong></h5>
           </th>
           <th>
             <a
@@ -42,7 +42,10 @@ href="{% static "css/carro.css" %}" rel="stylesheet"/>
       {% for i in productos %}
       <div class="cart-row">
         <div style="flex: 2;">
-          <img class="row-image" src="#" />
+          <img
+            class="row-image"
+            src="https://herramientas.cl/imagenes/productos/51233.jpg"
+          />
         </div>
         <div style="flex: 2;"><p>{{i.producto.descripcion}}</p></div>
         <div style="flex: 1;"><p>${{i.producto.precio}}</p></div>
@@ -50,21 +53,21 @@ href="{% static "css/carro.css" %}" rel="stylesheet"/>
           <p class="quantity">{{i.cantidad}}</p>
           <div class="quantity">
             <img
-              data-product="{{i.product.id}}"
-              data-action="add"
-              class="chg-quantity update-cart"
+              data-producto="{{i.producto.id_producto}}"
+              data-accion="agregar"
+              class="chg-quantity actualizar-carro"
               src="{% static 'imagenes/arrow-up.png' %}"
             />
 
             <img
-              data-product="{{item.product.id}}"
-              data-action="remove"
-              class="chg-quantity update-cart"
+              data-producto="{{i.producto.id_producto}}"
+              data-accion="eliminar"
+              class="chg-quantity actualizar-carro"
               src="{% static 'imagenes/arrow-down.png' %}"
             />
           </div>
         </div>
-        <!-- <div style="flex: 1;"><p>${{i.get_total|floatformat:2}}</p></div> -->
+        <div style="flex: 1;"><p>${{i.get_total}}</p></div>
       </div>
       {% endfor %}
     </div>
