@@ -11,7 +11,7 @@ for (var i = 0; i < actualizarBtns.length; i++) {
     if (usuario == "AnonymousUser") {
       console.log("usuario anónimo");
     } else {
-      actualizarOrdenUsuario();
+      actualizarOrdenUsuario(idProducto, accion);
     }
   });
 }
@@ -29,7 +29,9 @@ function actualizarOrdenUsuario(idProducto, accion) {
     },
     body: JSON.stringify({ idProducto: idProducto, accion: accion }),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      return response.json();
+    })
 
     .then((data) => {
       console.log("data:", data);

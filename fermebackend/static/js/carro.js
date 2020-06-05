@@ -44,6 +44,6 @@ function actualizarOrdenUsuario(idProducto, accion) {
 
     .then((data) => {
       console.log("dataaa:", data);
-      // location.reload();
+      location.reload();
     });
 }
