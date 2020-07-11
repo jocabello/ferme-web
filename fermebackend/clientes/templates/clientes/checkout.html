@@ -1,4 +1,141 @@
-{% extends 'home/base.html' %} {% block content %}
-<h1>checkout</h1>
+{% extends 'home/base.html' %} {% block content %} {% load static %} <link
+href="{% static "css/carro.css" %}" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<br />
+<div class="row">
+  <div class="col-lg-5">
+    <div class="box-element" id="form-wrapper">
+      <div>
+        <h3>Opción de compra:</h3>
+        <br />
+        <label>
+          <input type="radio" name="tipo_compra" value="1" /> Retiro en
+          tienda</label
+        ><br />
+        <label>
+          <input type="radio" name="tipo_compra" value="2" /> Despacho a
+          domicilio (Solo dentro de San Bernardo)</label
+        >
+      </div>
+      <form id="form">
+        <div id="user-info"></div>
+
+        <div id="shipping-info" class="panel-despacho">
+          <hr />
+          <h3>Información de despacho:</h3>
+          <hr />
+          <div class="form-field">
+            <input
+              class="form-control"
+              type="text"
+              name="calle"
+              placeholder="Calle.."
+            />
+          </div>
+          <div class="form-field">
+            <input
+              class="form-control"
+              type="text"
+              name="city"
+              placeholder="SAN BERNARDO"
+              disabled
+            />
+          </div>
+          <div class="form-field">
+            <input
+              class="form-control"
+              type="text"
+              name="numero"
+              placeholder="Número.."
+            />
+          </div>
+          <div class="form-field">
+            <input
+              class="form-control"
+              type="text"
+              name="zipcode"
+              placeholder="Código postal.."
+            />
+          </div>
+          <div class="form-field">
+            <input
+              type="text"
+              id="fname"
+              name="fname"
+              size="51"
+              placeholder="Comentario.."
+            />
+          </div>
+        </div>
+
+        <hr />
+        <input
+          id="form-button"
+          class="btn btn-success btn-block"
+          type="submit"
+          value="Ir al pago"
+        />
+      </form>
+    </div>
+
+    <br />
+    <div class="box-element hidden" id="payment-info">
+      <small>Paypal Options</small>
+      <button id="make-payment">Make payment</button>
+    </div>
+  </div>
+
+  <div class="col-lg-7">
+    <div class="box-element">
+      <a class="btn btn-outline-dark" href="/carro">&#x2190; Volver al carro</a>
+      <hr />
+      <h3>Resumen de compra</h3>
+      <hr />
+      {% for i in productos %}
+      <div class="cart-row">
+        <div style="flex: 1;">
+          <img
+            class="row-image"
+            src="https://herramientas.cl/imagenes/productos/51233.jpg"
+          />
+        </div>
+        <div style="flex: 3;"><p>{{i.producto.descripcion}}</p></div>
+        <div style="flex: 1;"><p>${{i.producto.precio}}</p></div>
+        <div style="flex: 1;"><p>x {{i.cantidad}}</p></div>
+      </div>
+      {% endfor %}
+      <h5>Items: {{orden.get_items_carro}}</h5>
+      <h5>Total: ${{orden.get_total_carro}}</h5>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('input[name="tipo_compra"]')
+    .on("change", function () {
+      $(".panel-despacho").toggle(+this.value == 2 && this.checked);
+    })
+    .change();
+
+  var form = document.getElementById("form");
+  var total = "{{orden.get_total_carro}}";
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log("Form Submitted...");
+    document.getElementById("form-button").classList.add("hidden");
+    document.getElementById("payment-info").classList.remove("hidden");
+  });
+
+  document
+    .getElementById("make-payment")
+    .addEventListener("click", function (e) {
+      submitFormData();
+    });
+
+  function submitFormData() {
+    console.log("Payment button clicked");
+  }
+</script>
 
 {% endblock content%}

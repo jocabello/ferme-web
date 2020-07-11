@@ -49,13 +49,15 @@ class Cliente(AbstractBaseUser):
     #telefono = models.IntegerField(blank=True)
     #carro_id = models.IntegerField()
 
-    p_natural_rut = models.CharField(max_length=50)
-    p_natural_nombre = models.CharField(max_length=50)
+    p_natural_rut = models.CharField(
+        "Rut", help_text='Campo requerido', max_length=50)
+    p_natural_nombre = models.CharField(
+        "Nombre", help_text='Campo requerido', max_length=50)
     p_natural_apellido = models.CharField(max_length=50)
 
-    empresa_rut = models.CharField(max_length=50)
-    empresa_nombre = models.CharField(max_length=50)
-    empresa_rol = models.CharField(max_length=50)
+    empresa_rut = models.CharField("Rut empresa", max_length=50)
+    empresa_nombre = models.CharField("Nombre empresa", max_length=50)
+    empresa_rol = models.CharField("Rol", max_length=50)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['p_natural_rut']

@@ -1,8 +1,9 @@
 {% extends 'home/base.html' %} {% block content %} {% load static %} <link
 href="{% static "css/carro.css" %}" rel="stylesheet"/>
-<h1>carro de compras</h1>
+<br />
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-1"></div>
+  <div class="col-lg-10">
     <div class="box-element">
       <a class="btn btn-outline-dark" href="/catalogo"
         >&#x2190; Seguir comprando</a
@@ -22,7 +23,7 @@ href="{% static "css/carro.css" %}" rel="stylesheet"/>
             <a
               style="float: right; margin: 5px;"
               class="btn btn-success"
-              href="#"
+              href="/checkout"
               >Checkout</a
             >
           </th>
@@ -41,13 +42,13 @@ href="{% static "css/carro.css" %}" rel="stylesheet"/>
       </div>
       {% for i in productos %}
       <div class="cart-row">
-        <div style="flex: 2;">
+        <div style="flex: 1;">
           <img
             class="row-image"
             src="https://herramientas.cl/imagenes/productos/51233.jpg"
           />
         </div>
-        <div style="flex: 2;"><p>{{i.producto.descripcion}}</p></div>
+        <div style="flex: 3;"><p>{{i.producto.descripcion}}</p></div>
         <div style="flex: 1;"><p>${{i.producto.precio}}</p></div>
         <div style="flex: 1;">
           <p class="quantity">{{i.cantidad}}</p>

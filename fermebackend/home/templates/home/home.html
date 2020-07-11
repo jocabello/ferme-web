@@ -1,4 +1,17 @@
-{% extends 'home/base.html' %} {% block content %}
+{% extends 'home/base.html' %} {% block content %} {% load static %} <link
+href="{% static "css/home.css" %}" rel="stylesheet"/>
 
-<h1>home</h1>
+<div class="bgimg">
+  <div class="topleft">
+    <p></p>
+  </div>
+  <div class="middle">
+    <h1>FERME</h1>
+    <hr />
+    <p>Tú ferretería, ahora online!</p>
+  </div>
+  <div class="bottomleft">
+    <p></p>
+  </div>
+</div>
 {% endblock %}

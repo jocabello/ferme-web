@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from clientes.views import registro, logout_view, editarCuenta, cambiarPassword, actualizarProducto, carro
+from clientes.views import registro, logout_view, editarCuenta, cambiarPassword, actualizarProducto, carro, checkout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,4 +35,5 @@ urlpatterns = [
          actualizarProducto,
          name="actualizar_producto"),
     path('carro/', carro, name="carro"),
+    path('checkout/', checkout, name="checkout"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

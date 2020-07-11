@@ -12,6 +12,8 @@ import json
 from home.models import Producto
 from clientes.models import *
 
+from django.contrib.auth.decorators import login_required
+
 
 def registro(response):
     if response.method == "POST":
@@ -58,21 +60,6 @@ def cambiarPassword(request):
                       {"form": form})
 
 
-def checkout(request):
-    # if request.user.is_authenticated:
-    #     cliente = request.user
-    #     orden, created = Orden.object.get_or_create(cliente=cliente,
-    #                                                 complete=False)
-    #     productos = orden.ordenproducto_set.all()
-    # else:
-    #     productos = []
-    #     orden = {'get_cart_total': 0, 'get_cart_items': 0}
-
-    # context = {'productos': productos, 'orden': orden}
-
-    return render(request, 'clientes/checkout.html', context)
-
-
 def actualizarProducto(request):
     body_unicode = request.body.decode('utf-8')
     data = json.loads(body_unicode)
@@ -116,3 +103,22 @@ def carro(request):
     context = {'productos': productos, 'orden': orden}
 
     return render(request, 'clientes/carro.html', context)
+
+
+@login_required
+def checkout(request):
+    if request.user.is_authenticated:
+        cliente = request.user
+        orden, created = Orden.objects.get_or_create(cliente=cliente,
+                                                     finalizada=False)
+        productos = orden.ordenproducto_set.all()
+        itemsCarro = Orden.get_items_carro
+    else:
+        productos = []
+        orden = {'get_total_carro': 0, 'get_items_carro': 0}
+        itemsCarro = orden['get_items_carro']
+
+    context = {'productos': productos,
+               'orden': orden, 'itemsCarro': itemsCarro}
+
+    return render(request, 'clientes/checkout.html', context)

@@ -1,0 +1,47 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.bgimg {
+  background-image: url("https://i.ibb.co/ZYKyGX3/casi-ready.png");
+  height: 70%;
+  background-position: center;
+  position: relative;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 25px;
+
+  /* Full height */
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.topleft {
+  position: absolute;
+  top: 0;
+  left: 16px;
+}
+
+.bottomleft {
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+}
+
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+}
+
+hr {
+  margin: auto;
+  width: 40%;
+}

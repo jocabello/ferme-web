@@ -11,7 +11,7 @@ TIPO_CLIENTE = [
 
 
 class RegistroForm(UserCreationForm):
-    email = forms.EmailField(max_length=60, help_text='Requeridox')
+    email = forms.EmailField(max_length=60, help_text='Campo requerido')
 
     tipo_cliente = forms.ChoiceField(label='Seleccionar tipo de cuenta:',
                                      choices=TIPO_CLIENTE,
