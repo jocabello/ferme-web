@@ -126,10 +126,11 @@ class DireccionDespacho(models.Model):
                               on_delete=models.SET_NULL,
                               blank=True,
                               null=True)
-    direccion = models.CharField(max_length=200, null=True)
-    comuna = models.CharField(max_length=50)
-    ciudad = models.CharField(max_length=50)
+    calle = models.CharField(max_length=200, null=True)
+    numero = models.CharField(max_length=50, null=True)
+    zipcode = models.CharField(max_length=50, null=True)
+    comentario = models.CharField(max_length=200, null=True)
     fecha_agregado = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.direccion
+        return self.calle + self.numero + self.comentario

@@ -61,7 +61,7 @@ href="{% static "css/carro.css" %}" rel="stylesheet"/>
             <input
               type="text"
               id="fname"
-              name="fname"
+              name="comentario"
               size="51"
               placeholder="Comentario.."
             />
@@ -135,6 +135,35 @@ href="{% static "css/carro.css" %}" rel="stylesheet"/>
 
   function submitFormData() {
     console.log("Payment button clicked");
+
+    var shippingInfo = {
+      calle: null,
+      numero: null,
+      zipcode: null,
+      comentario: null,
+    };
+
+    shippingInfo.calle = form.calle.value;
+    shippingInfo.numero = form.numero.value;
+    shippingInfo.zipcode = form.zipcode.value;
+    shippingInfo.comentario = form.comentario.value;
+
+    var url = "/procesar_orden/";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "applicaiton/json",
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({ despacho: shippingInfo, total: total }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        alert("Transacción completa");
+
+        window.location.href = "/";
+      });
   }
 </script>
 

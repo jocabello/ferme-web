@@ -8,6 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.http import JsonResponse
 
 import json
+import datetime
 
 from home.models import Producto
 from clientes.models import *
@@ -122,3 +123,36 @@ def checkout(request):
                'orden': orden, 'itemsCarro': itemsCarro}
 
     return render(request, 'clientes/checkout.html', context)
+
+
+def procesarOrden(request):
+    body_unicode = request.body.decode('utf-8')
+    data = json.loads(body_unicode)
+
+    print('datos: ', request.body)
+
+    transaccion_id = datetime.datetime.now().timestamp()
+
+    if request.user.is_authenticated:
+        cliente = request.user
+        orden, created = Orden.objects.get_or_create(cliente=cliente,
+                                                     finalizada=False)
+        total = data['total']
+        orden.id_transaccion = transaccion_id
+
+        # if total == orden.get_total_carro:
+        orden.finalizada = True
+        orden.save()
+
+        DireccionDespacho.objects.create(
+            cliente=cliente,
+            orden=orden,
+            calle=data['despacho']['calle'],
+            numero=data['despacho']['numero'],
+            zipcode=data['despacho']['zipcode'],
+            comentario=data['despacho']['comentario'],
+        )
+
+    else:
+        print("usuario no logueado")
+    return JsonResponse('Pago realizado', safe=False)
