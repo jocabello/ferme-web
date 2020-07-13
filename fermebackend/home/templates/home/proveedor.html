@@ -8,14 +8,15 @@ href="{% static "css/carro.css" %}" rel="stylesheet"/>
       <form method="POST" id="form">
         {% csrf_token %}
           <hr />
-          <h3>Contáctanos:</h3>
+          <h2>Contacto para Proveedores</h2>
+          <p>Si vendes insumos ferreteros y deseas abastecernos al por mayor, llena el formulario y te contacteremos!</p>
           <hr />
           <div class="form-field">
             <input
               class="form-control"
               type="text"
               name="nombre"
-              placeholder="Nombre.."
+              placeholder="Nombre de contacto"
             />
           </div>
           <div class="form-field">
@@ -23,17 +24,33 @@ href="{% static "css/carro.css" %}" rel="stylesheet"/>
               class="form-control"
               type="email"
               name="email"
-              placeholder="Email.."
+              placeholder="Email"
+            />
+          </div>
+          <div class="form-field">
+            <input
+              class="form-control"
+              type="text"
+              name="fono"
+              placeholder="Número de contacto.."
+            />
+          </div>
+          <div class="form-field">
+            <input
+              class="form-control"
+              type="text"
+              name="nombreEmpresa"
+              placeholder="Nombre de tu empresa"
             />
           </div>
           <br />
           <div class="form-field">
             <textarea
+              placeholder="¿Qué te gustaría vender con nosotros?"
               id="w3review"
               name="mensaje"
               rows="4"
               cols="51"
-              placeholder=" Mensaje.."
             ></textarea>
           </div>
         </div>

@@ -19,15 +19,19 @@
           >Inicio <span class="sr-only">(current)</span></a
         >
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="/catalogo">Catálogo</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="/contacto">Contacto</a>
       </li>
       {% if user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link">Hola, {{ user.p_natural_nombre }}! Bienvenido.</a>
+        <a class="nav-link">Hola {{ user.p_natural_nombre }}! Bienvenido</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="/proveedor">¿Quieres ser proveedor?</a>
       </li>
       {% endif %}
     </ul>
