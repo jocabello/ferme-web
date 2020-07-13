@@ -10,7 +10,7 @@ from django.http import JsonResponse
 import json
 import datetime
 
-from home.models import Producto
+from home.models import Producto, Venta, TipoVenta, DetalleVenta
 from clientes.models import *
 
 from django.contrib.auth.decorators import login_required
@@ -135,16 +135,33 @@ def procesarOrden(request):
 
     if request.user.is_authenticated:
         cliente = request.user
+
+        asdas = cliente.email
+        asdasd = cliente.id
+
+        clienteObjeto = Cliente.objects.get(email=asdas)
+
         orden, created = Orden.objects.get_or_create(cliente=cliente,
                                                      finalizada=False)
         total = data['total']
         orden.id_transaccion = transaccion_id
 
-        # if total == orden.get_total_carro:
+        # ordenProducto = OrdenProducto.objects.get(
+        #     orden=orden)
+
+        productos = orden.ordenproducto_set.all()
+
+        for i in productos:
+            producto = Producto.objects.get(
+                id_producto=i.producto.id_producto)
+            producto.stock = (producto.stock - i.cantidad)
+            producto.save()
+
+        # if total == orden.get_total_carro: #para no manipular desde el front
         orden.finalizada = True
         orden.save()
 
-        DireccionDespacho.objects.create(
+        DireccionDespacho.objects.create(  # NFRespaldo, enviar correo?quizás SI!
             cliente=cliente,
             orden=orden,
             calle=data['despacho']['calle'],
@@ -152,6 +169,29 @@ def procesarOrden(request):
             zipcode=data['despacho']['zipcode'],
             comentario=data['despacho']['comentario'],
         )
+
+        if(cliente.tipo_cliente == 'pnatural'):
+            tipoVenta = TipoVenta.objects.get(id_tipo_venta=1)  # 1=boleta
+        if(cliente.tipo_cliente == 'empresa'):
+            tipoVenta = TipoVenta.objects.get(id_tipo_venta=2)  # 2=factura
+
+        # registroVenta = Venta.objects.create(
+        #     total=total,
+        #     es_nula='n',
+        #     tipo_venta_id_tipo_venta=tipoVenta,
+        #     cliente_id_cliente=MiCliente.objects.get(email=asdas),
+        #     funcionario_rut_funcionario=99999999
+        # )
+        # registroVenta.save()
+
+        # for i in productos:
+        #     registroDetalle = DetalleVenta.objects.create(
+        #         cantidad=i.cantidad,
+        #         venta_id_venta=registroVenta.id_venta,
+        #         producto_id_producto=i.producto.id_producto,
+        #         venta_id_tipo_venta=tipoVenta,
+        #     )
+        #     registroDetalle.save()
 
     else:
         print("usuario no logueado")

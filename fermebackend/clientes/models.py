@@ -64,8 +64,8 @@ class Cliente(AbstractBaseUser):
 
     objects = ManejadorDeClientes()
 
-    def __str__(self):
-        return self.email
+    # def __str__(self):
+    #     return self.email
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
@@ -82,9 +82,6 @@ class Orden(models.Model):
     fecha_orden = models.DateTimeField(auto_now_add=True)
     finalizada = models.BooleanField(default=False, null=True, blank=False)
     id_transaccion = models.CharField(max_length=200, null=True)
-
-    def __str__(self):
-        return str(self.id)
 
     @property
     def get_total_carro(self):
