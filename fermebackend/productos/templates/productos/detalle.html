@@ -1,30 +1,34 @@
-{% extends 'home/base.html' %} {% block content %}
+{% extends 'home/base.html' %} {% block content %} {% load static %} <link
+href="{% static "css/carro.css" %}" rel="stylesheet"/>
+<br />
+<div class="col-lg-5"></div>
+<div class="col-lg-11">
+  <div class="box-element">
+    <div class="row">
+      <div class="col-xs-2 item-photo">
+        <img
+          style="max-width: 50%;"
+          src="https://herramientas.cl/imagenes/productos/51233.jpg"
+        />
+      </div>
+      <div class="col-xs-5" style="border: 0px solid gray;">
+        <h5>
+          {{producto.descripcion}}
+        </h5>
+        <h5 style="color: #337ab7;">Familia: <a href="#">insumos</a></h5>
+        <h6 class="title-price"><small>Stock: {{producto.stock}}</small></h6>
 
-<div class="container">
-  <div class="row">
-    <div class="col-xs-3 item-photo">
-      <img
-        style="max-width: 70%;"
-        src="https://herramientas.cl/imagenes/productos/51233.jpg"
-      />
-    </div>
-    <div class="col-xs-5" style="border: 0px solid gray;">
-      <h3>
-        {{producto.descripcion}}
-      </h3>
-      <h5 style="color: #337ab7;">Familia: <a href="#">insumos</a></h5>
-      <h6 class="title-price"><small>Stock: {{producto.stock}}</small></h6>
+        <h5 style="margin-top: 0px;">PRECIO: ${{producto.precio}}</h5>
 
-      <h3 style="margin-top: 0px;">PRECIO: ${{producto.precio}}</h3>
-
-      <div class="section" style="padding-bottom: 20px;">
-        <button
-          data-producto="{{producto.id_producto}}"
-          data-accion="agregar"
-          class="btn btn-success actualizar-carro"
-        >
-          Agregar al carro
-        </button>
+        <div class="section" style="padding-bottom: 20px;">
+          <button
+            data-producto="{{producto.id_producto}}"
+            data-accion="agregar"
+            class="btn btn-success actualizar-carro"
+          >
+            Agregar al carro
+          </button>
+        </div>
       </div>
     </div>
   </div>

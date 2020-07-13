@@ -1,20 +1,24 @@
-{% extends 'home/base.html' %} 
-{% block content %}
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
-{% load static %} 
-<link href="{% static "css/catalogo.css" %}" rel="stylesheet"/>
+{% extends 'home/base.html' %} {% block content %}
+<link
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+  rel="stylesheet"
+/>
+{% load static %} <link href="{% static "css/carro.css" %}" rel="stylesheet"/>
 {% load crispy_forms_tags %}
-
-<h2>Login</h2>
-<div class="col-sm-4">
-    <form method="POST" class="form-group">
-        {% csrf_token %}
-        {{form|crispy}}
+<br />
+<div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-5 box-element">
+    <h2>Login</h2>
+    <div class="col-sm-10">
+      <form method="POST" class="form-group">
+        {% csrf_token %} {{form|crispy}}
 
         <p>¿No posees una cuenta? Crea una <a href="/registro">Aquí</a></p>
         <button type="submit" class="btn btn-success">Iniciar sesión</button>
-
-    </form>
+      </form>
+    </div>
+  </div>
 </div>
 
 {% endblock content%}

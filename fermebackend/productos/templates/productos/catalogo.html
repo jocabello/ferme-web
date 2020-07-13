@@ -5,40 +5,44 @@
 />
 {% load static %} <link href="{% static "css/catalogo.css" %}"
 rel="stylesheet"/>
-
-<div class="contenido-catalogo">
-  <div class="container row">
-    {% for i in productos %}
-    <div class="col-sm-4">
-      <div class="ibox">
-        <div class="ibox-content product-box">
-          <div class="product-imitation">
-            [Imagen del producto :D]
-          </div>
-          <div class="product-desc">
-            <span class="product-price">
-              ${{i.precio}}
-            </span>
-            <small class="text-muted">Category</small>
-            <a href="#" class="product-name"> {{i.descripcion}}</a>
-
-            <div class="small m-t-xs">
-              Stock: {{i.stock}} id: {{i.id_producto}} fk familia:
-              {{i.fk_id_familia}}
+<div class="box-element col-sm-2"></div>
+<div class="box-element col-sm-10">
+  <div class="contenido-catalogo">
+    <div class="container row">
+      {% for i in productos %}
+      <div class="col-sm-4">
+        <div class="ibox">
+          <div class="ibox-content product-box">
+            <div class="product-imitation">
+              <img
+                style="max-width: 70%;"
+                src="https://herramientas.cl/imagenes/productos/51233.jpg"
+              />
             </div>
-            <br />
-            <div class="m-t text-center">
-              <a
-                href="/detalle/{{i.id_producto}}"
-                class="btn btn-xs btn-outline btn-primary"
-                >Ver detalle <i class="fa fa-long-arrow-right"></i>
-              </a>
+            <div class="product-desc">
+              <span class="product-price">
+                ${{i.precio}}
+              </span>
+              <small class="text-muted"></small>
+              <a href="#" class="product-name"> {{i.descripcion}}</a>
+
+              <div class="small m-t-xs">
+                Stock: {{i.stock}}
+              </div>
+              <br />
+              <div class="m-t text-center">
+                <a
+                  href="/detalle/{{i.id_producto}}"
+                  class="btn btn-xs btn-outline btn-primary"
+                  >Ver detalle <i class="fa fa-long-arrow-right"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 </div>
 

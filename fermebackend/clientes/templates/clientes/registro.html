@@ -1,37 +1,21 @@
-{% extends 'home/base.html' %} 
-{% block content %}
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
-{% load static %} 
-<link href="{% static "css/catalogo.css" %}" rel="stylesheet"/>
+{% extends 'home/base.html' %} {% block content %}
+<link
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+  rel="stylesheet"
+/>
+{% load static %} <link href="{% static "css/carro.css" %}" rel="stylesheet"/>
 {% load crispy_forms_tags %}
+<br />
+<div class="col-lg-4"></div>
+<div class="col-lg-8">
+  <div class="box-element">
+    <h2>Registro</h2>
 
-
-<h2>Registro</h2>
-<!-- <form method="POST">{% csrf_token %}
-    {% for field in registrarion_form %}
-        <p>
-            {{field.label_tag}}
-            {{field}}
-
-            {% if field.help_text %}
-                <small style="color: grey;">{{field.help_text}}</small>
-            {% endif %}
-
-            {% for error in field.errors %}
-                <p style="color: red;">{{error}}</p>
-            {% endfor %}
-        </p>
-    {% endfor %}
-    <button type="submit">Regisddtro</button>
-
-</form> -->
-
-<form method="POST" class="col-sm-4">
-    {% csrf_token %}
-    {{form|crispy}}
-    <button type="submit" class="btn btn-success">Registrarse!</button>
-
-</form>
-
+    <form method="POST" class="col-sm-5">
+      {% csrf_token %} {{form|crispy}}
+      <button type="submit" class="btn btn-success">Registrarse!</button>
+    </form>
+  </div>
+</div>
 
 {% endblock content%}
